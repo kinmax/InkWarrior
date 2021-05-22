@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     Vector2 moveInput;
     Animator anim;
     SpriteRenderer sprite;
-
     // Start is called before the first frame update
     void Start()
     {

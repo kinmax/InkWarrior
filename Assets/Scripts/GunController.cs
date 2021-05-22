@@ -5,6 +5,8 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     SpriteRenderer sprite;
+    public GameObject shot;
+    public Transform spawnShot;
 
     // Start is called before the first frame update
     void Start()
@@ -12,8 +14,7 @@ public class GunController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Aim()
     {
         Vector3 mousePosition = Input.mousePosition;
         Vector3 screenPoint = Camera.main.WorldToScreenPoint(transform.position);
@@ -25,5 +26,20 @@ public class GunController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
         sprite.flipY = (mousePosition.x < screenPoint.x);
+    }
+
+    void Shoot()
+    {
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Instantiate(shot, spawnShot.position, transform.rotation);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Aim();
+        Shoot();
     }
 }
