@@ -7,7 +7,7 @@ public class GunController : MonoBehaviour
     SpriteRenderer sprite;
     public GameObject shot;
     public Transform spawnShot;
-    public int inkLevel;
+    public InkLevelController inkLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -31,13 +31,9 @@ public class GunController : MonoBehaviour
 
     void Shoot()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Fire1") && inkLevel.shoot())
         {
-            if (inkLevel > 0)
-            {
-                Instantiate(shot, spawnShot.position, transform.rotation);
-                inkLevel--;
-            }
+            Instantiate(shot, spawnShot.position, transform.rotation);
         }
     }
 

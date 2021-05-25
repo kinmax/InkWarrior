@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
+    [SerializeField] InkLevelController inkLevel;
     Vector2 moveInput;
     Animator anim;
     SpriteRenderer sprite;
