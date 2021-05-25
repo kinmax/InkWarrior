@@ -23,9 +23,9 @@ public class InkLevelController : MonoBehaviour
 
     public bool shoot()
     {
-        if((level - 10) >= 0)
+        if((level - 1) >= 0)
         {
-            level = level - 10;
+            level = level - 1;
             return true;
         }
 
