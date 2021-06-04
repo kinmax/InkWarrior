@@ -16,6 +16,17 @@ public class PlayerController : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
+    bool InDistanceFromVan()
+    {
+        GameObject van = GameObject.FindGameObjectWithTag("Van");
+        if(van == null)
+        {
+            return false;
+        }
+        float distance = Vector3.Distance(this.gameObject.transform.position, van.transform.position);
+        return (distance < 5.0f);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -26,6 +37,13 @@ public class PlayerController : MonoBehaviour
 
         anim.SetBool("isMoving", (moveInput.x != 0 || moveInput.y != 0));
         CheckFlip();
+        
+        if(Input.GetButtonDown("Jump") && InDistanceFromVan())
+        {
+            GameObject van = GameObject.FindGameObjectWithTag("Van");
+            inkLevel.Refill();
+            Destroy(van, 0.5f);
+        }
     }
 
     void CheckFlip()

@@ -31,4 +31,10 @@ public class InkLevelController : MonoBehaviour
 
         return false;
     }
+
+    public void Refill()
+    {
+        int newLevel = Random.Range(0, 100-level);
+        level = newLevel;
+    }
 }

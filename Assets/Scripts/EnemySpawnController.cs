@@ -6,18 +6,23 @@ public class EnemySpawnController : MonoBehaviour
 {
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] GameObject enemy;
+    [SerializeField] int maxEnemyCount;
 
     void SpawnEnemy()
     {
-        int spawnIndex = Random.Range(0, spawnPoints.Length);
-        Transform spawnPoint = spawnPoints[spawnIndex];
-        Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+        if(GameObject.FindGameObjectsWithTag("Enemy").Length < maxEnemyCount)
+        {
+            int spawnIndex = Random.Range(0, spawnPoints.Length);
+            Transform spawnPoint = spawnPoints[spawnIndex];
+            Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+        }
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", 0.5f, 1.0f);
+        InvokeRepeating("SpawnEnemy", 0.5f, 30.0f);
     }
 
     // Update is called once per frame
