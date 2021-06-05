@@ -37,6 +37,11 @@ public class DeliveriesController : MonoBehaviour
         return deliveriesLeft;
     }
 
+    public int TotalDeliveries()
+    {
+        return deliveryPoints.Length;
+    }
+
     bool EnoughInk()
     {
         if(deliveriesLeft > 1)
