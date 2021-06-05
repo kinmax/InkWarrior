@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
     [SerializeField] InkLevelController inkLevel;
+    [SerializeField] DeliveriesController deliveries;
     Vector2 moveInput;
     Animator anim;
     SpriteRenderer sprite;
@@ -38,11 +39,15 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isMoving", (moveInput.x != 0 || moveInput.y != 0));
         CheckFlip();
         
-        if(Input.GetButtonDown("Jump") && InDistanceFromVan())
+        if(Input.GetButtonDown("Fire3") && InDistanceFromVan())
         {
             GameObject van = GameObject.FindGameObjectWithTag("Van");
             inkLevel.Refill();
             Destroy(van, 0.5f);
+        }
+        if(Input.GetButtonDown("Jump"))
+        {
+            deliveries.Deliver();
         }
     }
 

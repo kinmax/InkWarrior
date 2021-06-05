@@ -23,13 +23,23 @@ public class InkLevelController : MonoBehaviour
 
     public bool shoot()
     {
-        if((level - 5) >= 0)
+        if(level >= 5)
         {
-            level = level - 5;
+            level -= 5;
+            return true;
+        }
+        else if(level > 0)
+        {
+            level = 0;
             return true;
         }
 
         return false;
+    }
+
+    public void Subtract(int l)
+    {
+        this.level -= l;
     }
 
     public void Refill()
