@@ -47,4 +47,23 @@ public class InkLevelController : MonoBehaviour
         int newLevel = Random.Range(0, 100-level);
         level = newLevel;
     }
+
+    public void Damage()
+    {
+        if(level == 0)
+        {
+            level = -1;
+        }
+        else
+        {
+            if (level > 5)
+            {
+                level -= 5;
+            }
+            else
+            {
+                level = 0;
+            }
+        }        
+    }
 }
