@@ -43,6 +43,15 @@ public class DeliveriesController : MonoBehaviour
         return deliveryPoints.Length;
     }
 
+    public Transform CurrentDeliveryPoint()
+    {
+        if(deliveriesLeft > 0)
+        {
+            return this.deliveryPoints[currentPoint];
+        }
+        return this.deliveryPoints[this.deliveryPoints.Length - 1];
+    }
+
     bool EnoughInk()
     {
         if(deliveriesLeft > 1)
