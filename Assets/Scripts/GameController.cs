@@ -1,17 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] InkLevelController inkLevel;
     [SerializeField] DeliveriesController deliveries;
-    bool paused;
+    [SerializeField] GameObject PauseMenuUI;
+    [SerializeField] GameObject GameOverUI;
+    [SerializeField] GameObject LevelClearedUI;
+    bool paused, gameOver;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        LevelClearedUI.SetActive(false);
+        PauseMenuUI.SetActive(false);
+        GameOverUI.SetActive(false);
+        this.paused = false;
+        this.gameOver = false;
+        Time.timeScale = 1f;
     }
 
     public bool IsPaused()
@@ -19,23 +28,59 @@ public class GameController : MonoBehaviour
         return this.paused;
     }
 
+    public void NextLevel()
+    {
+        //LevelClearedUI.SetActive(false);
+        //this.paused = false;
+        //this.gameOver = false;
+        //Time.timeScale = 1f;
+    }
+
     void LevelCleared()
     {
+        LevelClearedUI.SetActive(true);
+        this.paused = true;
+        this.gameOver = true;
+        Time.timeScale = 0f;
+    }
 
+    public void RestartAfterLevelCleared()
+    {
+        LevelClearedUI.SetActive(false);
+        this.paused = false;
+        this.gameOver = false;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void RestartAfterGameOver()
+    {
+        GameOverUI.SetActive(false);
+        this.paused = false;
+        this.gameOver = false;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void GameOver()
     {
-
+        GameOverUI.SetActive(true);
+        this.paused = true;
+        this.gameOver = true;
+        Time.timeScale = 0f;
     }
 
     void Pause()
     {
+        PauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
         this.paused = true;
     }
 
-    void Resume()
+    public void Resume()
     {
+        PauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
         this.paused = false;
     }
 
@@ -46,11 +91,11 @@ public class GameController : MonoBehaviour
         {
             LevelCleared();
         }
-        else if(inkLevel.getInkLevel() <= 0)
+        else if(inkLevel.getInkLevel() < 0)
         {
             GameOver();
         }
-        else if(Input.GetButtonDown("Cancel"))
+        else if(Input.GetButtonDown("Cancel") && !gameOver)
         {
             if(paused)
             {

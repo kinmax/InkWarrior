@@ -10,7 +10,7 @@ public class DeliveryIndicatorController : MonoBehaviour
     {
         this.gameObject.transform.localScale += scaleChange;
 
-        if (this.gameObject.transform.localScale.y < 0.2f || this.gameObject.transform.localScale.y > 0.4f)
+        if (this.gameObject.transform.localScale.y < 0.09f || this.gameObject.transform.localScale.y > 0.15f)
         {
             scaleChange = -scaleChange;
         }
@@ -20,7 +20,7 @@ public class DeliveryIndicatorController : MonoBehaviour
     void Start()
     {
         scaleChange = new Vector3(-0.01f, -0.01f, -0.01f);
-        InvokeRepeating("ChangeScale", 0.0f, 0.03f);
+        InvokeRepeating("ChangeScale", 0.0f, 0.05f);
     }
 
     // Update is called once per frame

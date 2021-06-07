@@ -8,11 +8,22 @@ public class GunController : MonoBehaviour
     public GameObject shot;
     public Transform spawnShot;
     public InkLevelController inkLevel;
+    [SerializeField] GameController gameController;
 
     // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!gameController.IsPaused())
+        {
+            Aim();
+            Shoot();
+        }
     }
 
     void Aim()
@@ -35,12 +46,5 @@ public class GunController : MonoBehaviour
         {
             Instantiate(shot, spawnShot.position, transform.rotation);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Aim();
-        Shoot();
     }
 }

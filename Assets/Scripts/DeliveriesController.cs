@@ -10,13 +10,14 @@ public class DeliveriesController : MonoBehaviour
     [SerializeField] Transform[] deliveryPoints;
     [SerializeField] GameObject deliveryIndicator;
     [SerializeField] InkLevelController inkLevel;
+    [SerializeField] GameObject notEnoughInkText;
 
     void ShowIndicator()
     {
         if(deliveriesLeft > 0)
         {
             Transform point = deliveryPoints[currentPoint];
-            Instantiate(deliveryIndicator, new Vector3(point.position.x + 1.0f, point.position.y), Quaternion.identity);
+            Instantiate(deliveryIndicator, new Vector3(point.position.x+0.2f, point.position.y+1f), Quaternion.identity);
         }
     }
 
@@ -57,10 +58,8 @@ public class DeliveriesController : MonoBehaviour
 
     public bool Deliver()
     {
-        Debug.Log("Deliver");
         if(PlayerInRange() && deliveriesLeft > 0 && EnoughInk())
         {
-            Debug.Log("Deliver - Going to Deliver");
             currentPoint++;
             deliveriesLeft--;
             GameObject indicator = GameObject.FindGameObjectWithTag("DeliveryIndicator");
@@ -68,6 +67,10 @@ public class DeliveriesController : MonoBehaviour
             inkLevel.Subtract(inkPerPoint);
             ShowIndicator();
             return true;
+        }
+        else if(PlayerInRange() && deliveriesLeft > 0 && !EnoughInk())
+        {
+            notEnoughInkText.SetActive(true);
         }
 
         return false;

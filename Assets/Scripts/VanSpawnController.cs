@@ -7,6 +7,7 @@ public class VanSpawnController : MonoBehaviour
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] GameObject van;
     [SerializeField] InkLevelController inkLevel;
+    [SerializeField] GameObject vanIsHereText;
 
     void SpawnVan()
     {
@@ -24,6 +25,7 @@ public class VanSpawnController : MonoBehaviour
                     spawnPoint = t;
                 }
             }
+            vanIsHereText.SetActive(true);
             Instantiate(van, spawnPoint.position, Quaternion.identity);
         }
     }

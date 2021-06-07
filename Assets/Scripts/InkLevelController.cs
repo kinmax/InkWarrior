@@ -5,6 +5,8 @@ using UnityEngine;
 public class InkLevelController : MonoBehaviour
 {
     private int level;
+    [SerializeField] GameObject notEnoughInkText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,7 @@ public class InkLevelController : MonoBehaviour
 
     public void Refill()
     {
+        notEnoughInkText.SetActive(false);
         int newLevel = Random.Range(0, 100-level);
         level = newLevel;
     }

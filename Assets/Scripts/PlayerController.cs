@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] InkLevelController inkLevel;
     [SerializeField] DeliveriesController deliveries;
+    [SerializeField] GameController gameController;
+    [SerializeField] GameObject vanIsHereText;
     
     Animator anim;
     SpriteRenderer sprite;
@@ -30,34 +32,32 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        if(timer <= 0)
+        if(!gameController.IsPaused())
         {
-            invencible = false;
-        }
-        moveInput.x = Input.GetAxis("Horizontal");
-        moveInput.y = Input.GetAxis("Vertical");
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                invencible = false;
+            }
+            moveInput.x = Input.GetAxis("Horizontal");
+            moveInput.y = Input.GetAxis("Vertical");
 
-        transform.Translate(moveInput * Time.deltaTime * moveSpeed);
+            transform.Translate(moveInput * Time.deltaTime * moveSpeed);
 
-        anim.SetBool("isMoving", (moveInput.x != 0 || moveInput.y != 0));
-        CheckFlip();
-        
-        if(Input.GetButtonDown("Fire3") && InDistanceFromVan())
-        {
-            GameObject van = GameObject.FindGameObjectWithTag("Van");
-            inkLevel.Refill();
-            Destroy(van, 0.5f);
-        }
-        if(Input.GetButtonDown("Jump"))
-        {
-            deliveries.Deliver();
-        }
+            anim.SetBool("isMoving", (moveInput.x != 0 || moveInput.y != 0));
+            CheckFlip();
 
-        if(inkLevel.getInkLevel() < 0)
-        {
-            Time.timeScale = 0;
-            Destroy(gameObject);
+            if (Input.GetButtonDown("Fire3") && InDistanceFromVan())
+            {
+                GameObject van = GameObject.FindGameObjectWithTag("Van");
+                inkLevel.Refill();
+                Destroy(van, 0.1f);
+                vanIsHereText.SetActive(false);
+            }
+            if (Input.GetButtonDown("Jump"))
+            {
+                deliveries.Deliver();
+            }
         }
     }
 
