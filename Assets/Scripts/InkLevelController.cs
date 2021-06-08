@@ -6,6 +6,7 @@ public class InkLevelController : MonoBehaviour
 {
     private int level;
     [SerializeField] GameObject notEnoughInkText;
+    [SerializeField] int refillMin, refillMax;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +48,8 @@ public class InkLevelController : MonoBehaviour
     public void Refill()
     {
         notEnoughInkText.SetActive(false);
-        int newLevel = Random.Range(0, 100-level);
+        int min = level > refillMin ? refillMin : level;
+        int newLevel = Random.Range(min, refillMax);
         level = newLevel;
     }
 

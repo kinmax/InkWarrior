@@ -2635,6 +2635,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notEnoughInkText: {fileID: 240519165}
+  refillMin: 60
+  refillMax: 100
 --- !u!4 &1032058576
 Transform:
   m_ObjectHideFlags: 0
@@ -20961,6 +20963,8 @@ MonoBehaviour:
   - {fileID: 2132444965}
   enemy: {fileID: 4640429903979714547, guid: 66bd50a6fbe4002459c81310bf07ef05, type: 3}
   maxEnemyCount: 2
+  firstSpawn: 1
+  spawnInterval: 15
 --- !u!1001 &1726931729
 PrefabInstance:
   m_ObjectHideFlags: 0

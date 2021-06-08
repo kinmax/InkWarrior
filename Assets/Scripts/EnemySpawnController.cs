@@ -7,6 +7,8 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] GameObject enemy;
     [SerializeField] int maxEnemyCount;
+    [SerializeField] float firstSpawn;
+    [SerializeField] float spawnInterval;
 
     void SpawnEnemy()
     {
@@ -22,7 +24,7 @@ public class EnemySpawnController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", 0.5f, 5.0f);
+        InvokeRepeating("SpawnEnemy", firstSpawn, spawnInterval);
     }
 
     // Update is called once per frame
