@@ -30,10 +30,21 @@ public class GameController : MonoBehaviour
 
     public void NextLevel()
     {
-        //LevelClearedUI.SetActive(false);
-        //this.paused = false;
-        //this.gameOver = false;
-        //Time.timeScale = 1f;
+        LevelClearedUI.SetActive(false);
+        this.paused = false;
+        this.gameOver = false;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void QuitToMenu()
+    {
+        LevelClearedUI.SetActive(false);
+        GameOverUI.SetActive(false);
+        this.paused = false;
+        this.gameOver = false;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
 
     void LevelCleared()
