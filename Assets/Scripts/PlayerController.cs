@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer sprite;
     Material mWhite;
     Material mDefault;
+    AudioSource damegeFX;
 
     Vector2 moveInput;
     
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponentInChildren<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        damegeFX = GetComponent<AudioSource>();
         mDefault = sprite.material;
         mWhite = Resources.Load("mWhite", typeof(Material)) as Material;
     }
@@ -87,6 +89,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!invencible)
             {
+                damegeFX.Play();
                 StartCoroutine("Flash");
                 InvenciblePeriod();
                 inkLevel.Damage();
