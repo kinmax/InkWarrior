@@ -9,14 +9,26 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] int maxEnemyCount;
     [SerializeField] float firstSpawn;
     [SerializeField] float spawnInterval;
+    [SerializeField] Transform player;
 
     void SpawnEnemy()
     {
         if(GameObject.FindGameObjectsWithTag("Enemy").Length < maxEnemyCount)
         {
-            int spawnIndex = Random.Range(0, spawnPoints.Length);
-            Transform spawnPoint = spawnPoints[spawnIndex];
+            float minDist = 1000000000.0f;
+            Transform spawnPoint = spawnPoints[0].transform;
+            foreach (Transform t in spawnPoints)
+            {
+                float distance = Vector3.Distance(t.position, player.position);
+                if (distance < minDist)
+                {
+                    minDist = distance;
+                    spawnPoint = t;
+                }
+                
+            }
             Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+
         }
         
     }

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] DeliveriesController deliveries;
     [SerializeField] GameController gameController;
     [SerializeField] GameObject vanIsHereText;
+    [SerializeField] VanSpawnController vans;
     
     Animator anim;
     SpriteRenderer sprite;
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
             {
                 GameObject van = GameObject.FindGameObjectWithTag("Van");
                 inkLevel.Refill();
-                Destroy(van, 0.1f);
+                vans.DestroyVan();
                 vanIsHereText.SetActive(false);
             }
             if (Input.GetButtonDown("Jump"))

@@ -27,7 +27,7 @@ public class DeliveriesController : MonoBehaviour
         {
             Transform player = GameObject.FindGameObjectWithTag("Player").transform;
             Debug.Log("Deliver - Player in Range - " + Vector3.Distance(deliveryPoints[currentPoint].position, player.position));
-            return (Vector3.Distance(deliveryPoints[currentPoint].position, player.position) < 1.0f);
+            return (Vector3.Distance(deliveryPoints[currentPoint].position, player.position) < 3.0f);
         }
 
         return false;

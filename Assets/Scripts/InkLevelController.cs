@@ -48,7 +48,7 @@ public class InkLevelController : MonoBehaviour
     public void Refill()
     {
         notEnoughInkText.SetActive(false);
-        int min = level > refillMin ? refillMin : level;
+        int min = level > refillMin ? level : refillMin;
         int newLevel = Random.Range(min, refillMax);
         level = newLevel;
     }
