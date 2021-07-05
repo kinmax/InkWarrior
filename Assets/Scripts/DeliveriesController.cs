@@ -85,7 +85,11 @@ public class DeliveriesController : MonoBehaviour
     {
         if(PlayerInRange() && deliveriesLeft > 0 && EnoughInk())
         {
-            clearFX.Play();
+            if(deliveriesLeft > 1)
+            {
+                clearFX.Play();
+            }
+            
             currentPoint++;
             deliveriesLeft--;
             GameObject indicator = GameObject.FindGameObjectWithTag("DeliveryIndicator");
