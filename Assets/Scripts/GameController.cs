@@ -10,12 +10,18 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject PauseMenuUI;
     [SerializeField] GameObject GameOverUI;
     [SerializeField] GameObject LevelClearedUI;
-    [SerializeField] AudioSource audio;
+    [SerializeField] AudioSource backgroundMusic;
+    [SerializeField] AudioSource gameOverMusic;
+    [SerializeField] AudioSource levelClearedMusic;
+    bool playGameOver;
+    bool playLevelCleared;
     bool paused, gameOver;
 
     // Start is called before the first frame update
     void Start()
     {
+        playGameOver = true;
+        playLevelCleared = true;
         LevelClearedUI.SetActive(false);
         PauseMenuUI.SetActive(false);
         GameOverUI.SetActive(false);
@@ -48,8 +54,19 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    void PlayLevelClearedMusic()
+    {
+        if (playLevelCleared)
+        {
+            levelClearedMusic.Play();
+            playLevelCleared = false;
+        }
+    }
+
     void LevelCleared()
     {
+        backgroundMusic.Stop();
+        PlayLevelClearedMusic();
         LevelClearedUI.SetActive(true);
         this.paused = true;
         this.gameOver = true;
@@ -74,8 +91,19 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    void PlayGameOverMusic()
+    {
+        if (playGameOver)
+        {
+            gameOverMusic.Play();
+            playGameOver = false;
+        }
+    }
+
     void GameOver()
     {
+        backgroundMusic.Stop();
+        PlayGameOverMusic();
         GameOverUI.SetActive(true);
         this.paused = true;
         this.gameOver = true;
@@ -84,6 +112,7 @@ public class GameController : MonoBehaviour
 
     void Pause()
     {
+        backgroundMusic.volume = backgroundMusic.volume / 2;
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         this.paused = true;
@@ -91,6 +120,7 @@ public class GameController : MonoBehaviour
 
     public void Resume()
     {
+        backgroundMusic.volume = backgroundMusic.volume * 2;
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         this.paused = false;

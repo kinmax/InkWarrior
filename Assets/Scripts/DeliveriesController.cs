@@ -11,6 +11,22 @@ public class DeliveriesController : MonoBehaviour
     [SerializeField] GameObject deliveryIndicator;
     [SerializeField] InkLevelController inkLevel;
     [SerializeField] GameObject notEnoughInkText;
+    [SerializeField] AudioSource clearFX;
+    [SerializeField] AudioSource errorFX;
+
+    // Start is called before the first frame update
+    void Start()
+    {       
+        currentPoint = 0;
+        deliveriesLeft = deliveryPoints.Length;
+        ShowIndicator();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     void ShowIndicator()
     {
@@ -69,6 +85,7 @@ public class DeliveriesController : MonoBehaviour
     {
         if(PlayerInRange() && deliveriesLeft > 0 && EnoughInk())
         {
+            clearFX.Play();
             currentPoint++;
             deliveriesLeft--;
             GameObject indicator = GameObject.FindGameObjectWithTag("DeliveryIndicator");
@@ -79,23 +96,11 @@ public class DeliveriesController : MonoBehaviour
         }
         else if(PlayerInRange() && deliveriesLeft > 0 && !EnoughInk())
         {
+            errorFX.Play();
             notEnoughInkText.SetActive(true);
         }
 
         return false;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        currentPoint = 0;
-        deliveriesLeft = deliveryPoints.Length;
-        ShowIndicator();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
