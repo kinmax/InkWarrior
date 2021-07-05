@@ -9,11 +9,13 @@ public class GunController : MonoBehaviour
     public Transform spawnShot;
     public InkLevelController inkLevel;
     [SerializeField] GameController gameController;
+    AudioSource shootFX;
 
     // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        shootFX = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class GunController : MonoBehaviour
         if(Input.GetButtonDown("Fire1") && inkLevel.shoot())
         {
             Instantiate(shot, spawnShot.position, transform.rotation);
+            shootFX.Play();
         }
     }
 }

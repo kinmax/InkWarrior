@@ -9,6 +9,8 @@ public class VanSpawnController : MonoBehaviour
     [SerializeField] InkLevelController inkLevel;
     [SerializeField] GameObject vanIsHereText;
     [SerializeField] float interval;
+    [SerializeField] AudioSource hornFX;
+    [SerializeField] AudioSource leaveFX;
     GameObject currentPoint;
     Vector3 originalPos;
 
@@ -33,6 +35,7 @@ public class VanSpawnController : MonoBehaviour
             }
             vanIsHereText.SetActive(true);
             VanPointController comp = currentPoint.GetComponent(typeof(VanPointController)) as VanPointController;
+            hornFX.Play();
             GameObject vanInst = Instantiate(van, spawnPoint.position, Quaternion.identity);
             if (comp.Vertical())
             {
@@ -43,10 +46,11 @@ public class VanSpawnController : MonoBehaviour
 
     public void DestroyVan()
     {
+        leaveFX.Play();
         originalPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
         InvokeRepeating("MoveVan", 0.1f, 0.001f);
         GameObject v = GameObject.FindGameObjectWithTag("Van");
-        Destroy(v, 1.0f);
+        Destroy(v, 3.0f);
     }   
 
     public void MoveVan()
@@ -66,7 +70,7 @@ public class VanSpawnController : MonoBehaviour
             move.y = -move.y;
         }
         
-        float moveSpeed = 5.0f;
+        float moveSpeed = 3.0f;
         v.transform.Translate(move * Time.deltaTime * moveSpeed);
     }
 

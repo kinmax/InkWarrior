@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject PauseMenuUI;
     [SerializeField] GameObject GameOverUI;
     [SerializeField] GameObject LevelClearedUI;
+    [SerializeField] AudioSource audio;
     bool paused, gameOver;
 
     // Start is called before the first frame update

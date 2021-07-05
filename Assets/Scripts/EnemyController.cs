@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     GameObject player;
     Animator anim;
     SpriteRenderer sprite;
+    AudioSource deathFX;
     bool isAlive = true;
 
     // Start is called before the first frame update
@@ -16,6 +17,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponentInChildren<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        deathFX = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class EnemyController : MonoBehaviour
             anim.SetTrigger("dead");
             sprite.material.SetColor("_Color", shotSprite.material.color);
             isAlive = false;
+            deathFX.Play();
             Destroy(gameObject, 0.5f);
         }
     }
