@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShotController : MonoBehaviour
 {
     [SerializeField] float speed;
+    [SerializeField] ParticleSystem effect;
     SpriteRenderer sprite;
 
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class ShotController : MonoBehaviour
             case 4: sprite.material.SetColor("_Color", Color.magenta); break;
 
         }
+        effect.startColor = sprite.material.color;
         
     }
 
@@ -31,6 +33,7 @@ public class ShotController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Instantiate(effect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }
