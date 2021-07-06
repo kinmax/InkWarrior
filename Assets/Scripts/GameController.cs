@@ -41,7 +41,15 @@ public class GameController : MonoBehaviour
         this.paused = false;
         this.gameOver = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        int scenes = SceneManager.sceneCountInBuildSettings;
+        if(SceneManager.GetActiveScene().buildIndex + 1 == scenes)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     public void QuitToMenu()
