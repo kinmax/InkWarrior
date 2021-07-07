@@ -11,12 +11,13 @@ public class VanSpawnController : MonoBehaviour
     [SerializeField] float interval;
     [SerializeField] AudioSource hornFX;
     [SerializeField] AudioSource leaveFX;
+    [SerializeField] int spawnThreshold;
     GameObject currentPoint;
     Vector3 originalPos;
 
     void SpawnVan()
     {
-        if (inkLevel.getInkLevel() <= 20 && GameObject.FindGameObjectsWithTag("Van").Length == 0)
+        if (inkLevel.getInkLevel() <= spawnThreshold && GameObject.FindGameObjectsWithTag("Van").Length == 0)
         {
             float maxDist = -1.0f;
             currentPoint = null;
