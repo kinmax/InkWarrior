@@ -25,8 +25,15 @@ public class EnemyController : MonoBehaviour
     {
         if(player != null && isAlive)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-            CheckFlip();
+            if(Vector2.Distance(transform.position, player.transform.position) > 15)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+                CheckFlip();
+            }            
         }
     }
 
