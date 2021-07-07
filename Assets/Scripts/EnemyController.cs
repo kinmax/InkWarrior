@@ -41,6 +41,7 @@ public class EnemyController : MonoBehaviour
     {             
         if(collision.CompareTag("Shot"))
         {
+            gameObject.tag = "DeadEnemy";
             SpriteRenderer shotSprite = collision.GetComponentInParent<SpriteRenderer>();
             anim.SetTrigger("dead");
             sprite.material.SetColor("_Color", shotSprite.material.color);

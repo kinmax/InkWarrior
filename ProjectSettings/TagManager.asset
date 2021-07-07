@@ -9,6 +9,7 @@ TagManager:
   - Van
   - Delivery
   - DeliveryIndicator
+  - DeadEnemy
   layers:
   - Default
   - TransparentFX
